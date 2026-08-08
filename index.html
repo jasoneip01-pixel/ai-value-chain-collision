@@ -482,27 +482,69 @@ td:first-child {
 
 /* ===== NAV ===== */
 .nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
+  position: sticky;
+  top: 0;
   z-index: 100;
-  background: rgba(10,14,23,.85);
+  background: rgba(10,14,23,.92);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(36,48,73,.6);
-  padding: 12px 0;
-  transform: translateY(-100%);
-  transition: transform .3s ease;
+  padding: 10px 0;
 }
-.nav.show { transform: translateY(0); }
-.nav-inner { display: flex; justify-content: space-between; align-items: center; }
-.nav-links { display: flex; gap: 18px; font-size: 13px; }
-.nav-links a { color: var(--text2); text-decoration: none; }
-.nav-links a:hover { color: var(--spark); }
-.nav-title { font-size: 14px; font-weight: 700; }
-@media (max-width: 700px) { .nav-links { display: none; } }
+.nav-inner { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.nav-links { display: flex; gap: 6px; font-size: 13px; flex-wrap: wrap; }
+.nav-links a {
+  color: var(--text2);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 100px;
+  transition: all .2s ease;
+  white-space: nowrap;
+}
+.nav-links a:hover { color: var(--spark); background: rgba(34,211,238,.08); }
+.nav-links a.active { color: var(--spark); background: rgba(34,211,238,.12); font-weight: 700; }
+.nav-title { font-size: 14px; font-weight: 700; white-space: nowrap; }
+@media (max-width: 860px) {
+  .nav-inner { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .nav-links { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .nav-links::-webkit-scrollbar { display: none; }
+}
+
+/* back to top */
+.back-top {
+  position: fixed;
+  bottom: 28px; right: 28px;
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  background: var(--card2);
+  border: 1px solid var(--spark);
+  color: var(--spark);
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 99;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: all .3s ease;
+  box-shadow: 0 4px 16px rgba(0,0,0,.4);
+}
+.back-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.back-top:hover { background: rgba(34,211,238,.15); }
+
+/* progress bar */
+.progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--karp), var(--spark), var(--aschen));
+  z-index: 200;
+  transition: width .1s linear;
+}
 </style>
 </head>
 <body>
 
+<div class="progress" id="progress"></div>
 <nav class="nav" id="nav">
   <div class="container nav-inner">
     <div class="nav-title">三案例对撞 · AI 价值链</div>
@@ -511,6 +553,7 @@ td:first-child {
       <a href="#collisions">对撞点</a>
       <a href="#finding">最大发现</a>
       <a href="#aschen">爆仓故事</a>
+      <a href="#svws">硅谷vs华尔街</a>
       <a href="#conclusion">投资判断</a>
     </div>
   </div>
@@ -526,7 +569,7 @@ td:first-child {
     <span>🔵 Jeff Dean · Discovery Loop</span>
     <span>🔴 Aschenbrenner · SA Fund</span>
   </div>
-  <div class="scroll-hint">▼ 向下滚动 · 四个对撞点</div>
+  <div class="scroll-hint">▼ 向下滚动 · 完整对撞链</div>
 </header>
 
 <!-- ============ PLAYERS ============ -->
@@ -539,7 +582,6 @@ td:first-child {
         <div class="player-top"></div>
         <div class="player-photo-wrap">
           <img src="karp.webp" alt="Alex Karp" loading="lazy">
-          <span class="player-photo-tag">真实照片</span>
         </div>
         <div class="player-body">
           <div class="player-name">Alex Karp</div>
@@ -557,7 +599,6 @@ td:first-child {
         <div class="player-top"></div>
         <div class="player-photo-wrap">
           <img src="dean.webp" alt="Jeff Dean" loading="lazy">
-          <span class="player-photo-tag">真实照片</span>
         </div>
         <div class="player-body">
           <div class="player-name">Jeff Dean</div>
@@ -575,7 +616,6 @@ td:first-child {
         <div class="player-top"></div>
         <div class="player-photo-wrap">
           <img src="aschen.webp" alt="Leopold Aschenbrenner" loading="lazy">
-          <span class="player-photo-tag">真实照片</span>
         </div>
         <div class="player-body">
           <div class="player-name">Leopold Aschenbrenner</div>
@@ -788,10 +828,65 @@ td:first-child {
   </div>
 </section>
 
+<!-- ============ SV vs WS ============ -->
+<section class="section" id="svws">
+  <div class="container">
+    <div class="section-title"><span class="num">05</span>底层机制 · 硅谷 vs 华尔街</div>
+    <p class="section-lead">Aschenbrenner 的爆仓不是孤立事件——它暴露了硅谷与华尔街两套资本逻辑的碰撞。表面是文化，底层是四个变量：<b style="color:var(--spark)">时间尺度、资本结构、失败定价、信息类型</b>。文化只是这四个变量的涌现产物。</p>
+
+    <div class="collision fade-in">
+      <h3><span class="cnum">变量 1</span>时间尺度 · 买期权 vs 做市</h3>
+      <div class="claim claim-dean"><span class="who">硅谷的钱</span><p>锁 7-10 年（VC 基金周期），赌「方向对不对」——早五年入场不是错误，是成本。所以 Aschenbrenner 今年 +80% 后爆仓，硅谷看到的是「他方向对了」。</p></div>
+      <div class="claim claim-aschen"><span class="who">华尔街的钱</span><p>按季度考核、按日盯市，赌「这个月扛不扛得住」——LTCM 的模型到今天都没被证伪，他们死在天时+杠杆，不是死在观点。</p></div>
+      <div class="collision-conclusion">
+        <div class="tag">结论</div>
+        <p><b>同一个人的同一笔交易，在两种时间尺度下是两种资产。</b></p>
+      </div>
+    </div>
+
+    <div class="collision fade-in">
+      <h3><span class="cnum">变量 2</span>资本结构 · 股权型 vs 债务型</h3>
+      <div class="claim claim-dean"><span class="who">硅谷的钱</span><p>本质是 <b>call option</b>：LP 拿可承受归零的小仓位，买一个 100x 的右尾。亏损是预算内的，是学费。</p></div>
+      <div class="claim claim-aschen"><span class="who">华尔街的钱</span><p>本质是 <b>put option</b>：养老金必须保本，杠杆资金有 margin call——它自带止损机制，不由人意志转移。Aschenbrenner 被 Citadel 折价接走仓位，就是 put option 被行权。</p></div>
+      <div class="collision-conclusion">
+        <div class="tag">结论</div>
+        <p><b>同一场爆仓，两种钱在两种规则下都理性。</b></p>
+      </div>
+    </div>
+
+    <div class="collision fade-in">
+      <h3><span class="cnum">变量 3</span>失败定价 · 伤疤是勋章 vs 伤疤是案底</h3>
+      <div class="claim claim-dean"><span class="who">硅谷</span><p>失败是资历。「烧掉过 2000 万」是加分项——行业共识是「方向对的人迟早赢」。被揍一拳反而激起团结。</p></div>
+      <div class="claim claim-aschen"><span class="who">华尔街</span><p>失败是污点。LTCM 合伙人的名字从此和「傲慢」绑定，Bill Hwang 直接消失。行业靠 reputation 自治——Barclays 拒客、大摩先拒后收，就是这种定价机制在运作。</p></div>
+      <div class="collision-conclusion">
+        <div class="tag">结论</div>
+        <p><b>真正的风险阀门不在 LP 手里，在几家 prime broker 的风控台上。</b></p>
+      </div>
+    </div>
+
+    <div class="collision fade-in">
+      <h3><span class="cnum">变量 4</span>信息类型 · 判断人 vs 测量仓位</h3>
+      <div class="claim claim-dean"><span class="who">硅谷的核心信息</span><p>不可测量的判断——创始人行不行、技术方向对不对，只能靠叙事和洞察。</p></div>
+      <div class="claim claim-aschen"><span class="who">华尔街的核心信息</span><p>可测量的数据——S3 能算出「超级集中+超级拥挤+超级高杠杆」，这是他们的商业模式本身。</p></div>
+      <div class="collision-conclusion">
+        <div class="tag">结论</div>
+        <p>所以两边对同一事件读出的东西天然不同：<b>一个读「这个人」，一个读「这个仓位」</b>。</p>
+      </div>
+    </div>
+
+    <div class="finding fade-in" style="margin-top:28px">
+      <div class="kicker">⚠ 最锋利的点</div>
+      <h2 style="font-size:clamp(20px,3.5vw,30px)">这两套东西正在融合<br>而融合区就是风险区</h2>
+      <p style="font-size:15px; color:var(--text2); max-width:720px; margin:0 auto; margin-top:12px">SoftBank 用硅谷叙事做华尔街规模的杠杆，Tiger 用 WS 模型做 VC，Citadel 拿真金白银接 AI 资产。<b style="color:var(--bad)">Aschenbrenner 的基金本身就是融合产物——硅谷的钱（湾区家办）跑华尔街的策略（集中+杠杆），却没有华尔街的风控</b>。他爆仓不是偶然，是资本结构错配的必然：SV 资本的信仰浓度 × WS 策略的杠杆倍数 = 两者缺点的交集。</p>
+      <p style="font-size:14px; color:var(--text3); max-width:720px; margin:0 auto; margin-top:14px">对投资者：持有标普500ETF 就是在买这个融合区的 beta。当 AI 叙事的钱（硅谷型）开始用杠杆（华尔街型）交易时，<b style="color:var(--spark)">波动是结构性的，不是情绪性的</b>——所以回撤会又快又深，仓位纪律永远优先于观点正确。</p>
+    </div>
+  </div>
+</section>
+
 <!-- ============ COUNTER ARG ============ -->
 <section class="section">
   <div class="container">
-    <div class="section-title"><span class="num">05</span>反方自检</div>
+    <div class="section-title"><span class="num">06</span>反方自检</div>
     <div class="counter fade-in">
       <blockquote>「你把三个案例凑成『价值链三层』，但 Karp 是上市公司 CEO（有估值动机）、Jeff Dean 是刚创业（有融资动机）、Aschenbrenner 是爆仓者（有自保动机）——三个都是利益绑定叙事，凑在一起是对号入座，不是发现。」</blockquote>
       <h4>回应 · 行动证据比言论可靠</h4>
@@ -832,6 +927,8 @@ td:first-child {
   </div>
 </footer>
 
+<button class="back-top" id="backTop" aria-label="回到顶部">↑</button>
+
 <script>
 // 滚动渐入
 const observer = new IntersectionObserver((entries) => {
@@ -844,15 +941,29 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-// 导航栏显示/隐藏
-const nav = document.getElementById('nav');
-let lastY = window.scrollY;
+// 阅读进度条
+const progress = document.getElementById('progress');
+const backTop = document.getElementById('backTop');
 window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-  if (y > 400 && y < lastY - 4) nav.classList.add('show');
-  else if (y > lastY + 4 || y < 80) nav.classList.remove('show');
-  lastY = y;
+  const h = document.documentElement;
+  const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight);
+  progress.style.width = (scrolled * 100) + '%';
+  backTop.classList.toggle('show', h.scrollTop > 600);
 }, { passive: true });
+backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// scrollspy：高亮当前区块
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const spy = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+sections.forEach(s => spy.observe(s));
 </script>
 </body>
 </html>
