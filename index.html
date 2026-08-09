@@ -464,6 +464,33 @@ td:first-child {
 .story-item.peak { background: rgba(34,211,238,.05); border-color: rgba(34,211,238,.2); }
 .story-item.good { background: rgba(52,211,153,.05); border-color: rgba(52,211,153,.2); }
 .story-item.warn { background: rgba(251,191,36,.05); border-color: rgba(251,191,36,.2); }
+.story-item .story-quote {
+  margin-top: 12px; padding: 10px 14px;
+  border-left: 3px solid var(--spark);
+  background: rgba(255,255,255,.03);
+  border-radius: 0 8px 8px 0;
+  font-size: 13px; color: var(--text2);
+  line-height: 1.7;
+}
+.story-item .story-quote b { color: var(--karp); font-weight: 600; }
+.story-item.cold .story-quote b { color: var(--bad); }
+.story-item.good .story-quote b { color: var(--good); }
+.story-item.peak .story-quote b { color: var(--spark); }
+.var-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+  margin-bottom: 26px;
+}
+.var-chip {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 16px 14px; text-align: center;
+  transition: border-color .3s, transform .3s;
+}
+.var-chip:hover { border-color: var(--spark); transform: translateY(-2px); }
+.var-chip .vi { font-size: 22px; margin-bottom: 8px; }
+.var-chip .vt { font-size: 13px; font-weight: 700; color: var(--text); }
+.var-chip .vs { font-size: 11.5px; color: var(--text3); margin-top: 4px; line-height: 1.5; }
+.var-chip.active { border-color: var(--spark); box-shadow: 0 0 0 1px rgba(34,211,238,.2); }
+@media (max-width: 760px) { .var-grid { grid-template-columns: repeat(2, 1fr); } }
 .counter {
   background: var(--card);
   border: 1px solid var(--border);
@@ -716,7 +743,7 @@ td:first-child {
         <div class="player-body">
           <div class="player-name">Jeff Dean</div>
           <div class="player-role">Discovery Loop 创始人 · 自动化科研</div>
-          <p class="player-desc">Google 27 年老将离开大厂，用 AI 自动化「假设→实验→评估→迭代」的科学循环。Alphabet 第一年算力全包。</p>
+          <p class="player-desc">Google 27 年老将离开大厂，用 AI 自动化「假设→实验→评估→迭代」的科学循环。Alphabet 第一年算力全包。</p><div class="story-quote" style="margin-top:10px">「算力本身不创造价值，<b>围绕算力的循环</b>才创造价值。」</div>
           <div class="player-facts">
             <div><b>变现：</b>十年尺度耐心资本</div>
             <div><b>壁垒：</b>天才 + 基础设施 + 递归暗线</div>
@@ -732,7 +759,7 @@ td:first-child {
         <div class="player-body">
           <div class="player-name">Leopold Aschenbrenner</div>
           <div class="player-role">Situational Awareness 基金 · 信仰资本 + 杠杆</div>
-          <p class="player-desc">前 OpenAI 研究员，一篇 165 页宣言募到百亿资金，四倍杠杆重仓 AI 基建。方向看对，被杠杆反噬。</p>
+          <p class="player-desc">前 OpenAI 研究员，一篇 165 页宣言募到百亿资金，四倍杠杆重仓 AI 基建。方向看对，被杠杆反噬。</p><div class="story-quote" style="margin-top:10px">「他没有突然改变对 AI 的判断，<b>只是他的账户已经没有资格继续等待</b>。」</div>
           <div class="player-facts">
             <div><b>变现：</b>信仰溢价 + 杠杆放大</div>
             <div><b>壁垒：</b>叙事能力 + 判断力</div>
@@ -857,47 +884,47 @@ td:first-child {
       <div class="story-item">
         <div class="when">2021 · 哥伦比亚大学</div>
         <h4>医生世家走出的 AI 天才</h4>
-        <p>生于德国，父母均为医生。<b>19 岁以全校第一毕业</b>，获经济学与数理统计双学位，在校联合创立「有效利他主义」（EA）分会。后来这个理念把他带进了 FTX。</p>
+        <p>生于德国，父母均为医生。<b>19 岁以全校第一毕业</b>，获经济学与数理统计双学位，在校联合创立「有效利他主义」（EA）分会。后来这个理念把他带进了 FTX。</p><div class="story-quote"><b>19 岁</b>，医生世家，全校第一：一个相信「用理性改变世界」的年轻人入场。</div>
       </div>
       <div class="story-item">
         <div class="when">2022 · FTX → OpenAI</div>
         <h4>SBF 的小弟 → Ilya 的门徒</h4>
-        <p>2022 年 2 月加入 <b>FTX Future Fund</b>（SBF 的慈善基金），直到 11 月 FTX 暴雷前夕离开。2023 年转投 OpenAI，进入 <b>Ilya Sutskever 和 Jan Leike 领导的 Superalignment 团队</b>。因一份安全备忘录与董事会产生分歧，2024 年 4 月被 OpenAI 以「信息泄露」为由解雇。一个月后 Superalignment 团队解散，Ilya 也离开了。</p>
+        <p>2022 年 2 月加入 <b>FTX Future Fund</b>（SBF 的慈善基金），直到 11 月 FTX 暴雷前夕离开。2023 年转投 OpenAI，进入 <b>Ilya Sutskever 和 Jan Leike 领导的 Superalignment 团队</b>。因一份安全备忘录与董事会产生分歧，2024 年 4 月被 OpenAI 以「信息泄露」为由解雇。一个月后 Superalignment 团队解散，Ilya 也离开了。</p><div class="story-quote">从 SBF 到 Ilya：他两次站在<b>最激进想法的最前沿</b>。</div>
       </div>
       <div class="story-item peak">
         <div class="when">2024 年 6 月 · 165 页宣言</div>
         <h4>《Situational Awareness》：AI 时代的「长电报」</h4>
-        <p>离开 OpenAI 仅两个月，他写出 <b>165 页超级论文《情境感知：未来十年》</b>：预测 AGI 到来、设想超级智能路径、描述人类四大风险。这篇宣言像病毒一样在硅谷和华盛顿疯传，科技圈开始叫他<b class="hot">「AI 时代的先知」</b>。</p>
+        <p>离开 OpenAI 仅两个月，他写出 <b>165 页超级论文《情境感知：未来十年》</b>：预测 AGI 到来、设想超级智能路径、描述人类四大风险。这篇宣言像病毒一样在硅谷和华盛顿疯传，科技圈开始叫他<b class="hot">「AI 时代的先知」</b>。</p><div class="story-quote">165 页，两个月：<b>一个人的思想可以成为一个时代的定价锚</b>。</div>
       </div>
       <div class="story-item good">
         <div class="when">2024 年 9 月 · 创立基金</div>
         <h4>Situational Awareness LP：论文同名基金</h4>
-        <p>从 <b>2.25 亿美元</b>起步，二十个月后规模超 <b>200 亿美元</b>。LP 包括 Stripe 联合创始人、前 GitHub CEO、知名投资人。重仓 AI 基础设施（能源/算力/光通信/存储），<b>Anthropic 占基金资产五分之一</b>（估值 6150 亿→96500 亿）。最赚钱的一笔：SK 海力士。</p>
+        <p>从 <b>2.25 亿美元</b>起步，二十个月后规模超 <b>200 亿美元</b>。LP 包括 Stripe 联合创始人、前 GitHub CEO、知名投资人。重仓 AI 基础设施（能源/算力/光通信/存储），<b>Anthropic 占基金资产五分之一</b>（估值 6150 亿→96500 亿）。最赚钱的一笔：SK 海力士。</p><div class="story-quote">从 2.25 亿到 200 亿：<b>叙事 + 杠杆 = 最快的资本复合机</b>。</div>
       </div>
       <div class="story-item warn">
         <div class="when">2026 年 6 月 · 巅峰</div>
         <h4>450 亿美元 · 年度净回报 439%</h4>
-        <p>成立以来累计回报 <b class="hot">超 1000%</b>，今年截至 6 月底年度净回报 <b class="hot">439%</b>，资产规模一度达 <b class="hot">450 亿美元</b>。粉丝像研读圣经一样分析他的持仓，甚至有 APP 推出「一键跟单」。Jane Street 罕见地把钱交给他。</p>
+        <p>成立以来累计回报 <b class="hot">超 1000%</b>，今年截至 6 月底年度净回报 <b class="hot">439%</b>，资产规模一度达 <b class="hot">450 亿美元</b>。粉丝像研读圣经一样分析他的持仓，甚至有 APP 推出「一键跟单」。Jane Street 罕见地把钱交给他。</p><div class="story-quote">450 亿，+439%：<b>站在山顶时，所有人都以为路只有一条</b>。</div>
       </div>
       <div class="story-item cold">
         <div class="when">2026 年 7 月 · 噩梦</div>
         <h4>四倍杠杆 × AI 基建暴跌 = 爆仓</h4>
-        <p>一个月里纳斯达克 100 跌约 10%、费城半导体指数跌 25%、韩国市场回落超 30%。他重仓的 AI 基建股（Nebius、SanDisk、Bloom Energy、CoreWeave）月内跌幅超 30%。<b>杠杆可能接近四倍</b>，市场跌下来的每一美元都变成更深的一刀。公开账面单月亏损 <b class="cold">47-55 亿美元</b>，其中 <b>93% 的亏损集中在 8 只 AI 基建重仓股</b>。对冲设计失效：半导体看跌期权收益无法抵消多头亏损，空头反而因资金回流传统软件上涨产生亏损。</p>
+        <p>一个月里纳斯达克 100 跌约 10%、费城半导体指数跌 25%、韩国市场回落超 30%。他重仓的 AI 基建股（Nebius、SanDisk、Bloom Energy、CoreWeave）月内跌幅超 30%。<b>杠杆可能接近四倍</b>，市场跌下来的每一美元都变成更深的一刀。公开账面单月亏损 <b class="cold">47-55 亿美元</b>，其中 <b>93% 的亏损集中在 8 只 AI 基建重仓股</b>。对冲设计失效：半导体看跌期权收益无法抵消多头亏损，空头反而因资金回流传统软件上涨产生亏损。</p><div class="story-quote">四倍杠杆：<b>方向对的人，被波动本身杀死</b>。</div>
       </div>
       <div class="story-item cold">
         <div class="when">2026 年 7 月 29 日 · 出局</div>
         <h4>打包卖给 Citadel</h4>
-        <p>六天前他还在给投资人的信里说「这是 2025 年初以来最好的买入机会」，六天后他把这些「最好的买入机会」全部卖给了肯·格里芬的 Citadel。私募资产无法快速变现，融资尝试失败，<b>基金实质终结，享年两岁</b>。</p>
+        <p>六天前他还在给投资人的信里说「这是 2025 年初以来最好的买入机会」，六天后他把这些「最好的买入机会」全部卖给了肯·格里芬的 Citadel。私募资产无法快速变现，融资尝试失败，<b>基金实质终结，享年两岁</b>。</p><div class="story-quote">六天前「最好的买入机会」，六天后全部卖出：<b>信仰的时间尺度，扛不住 margin call 的分钟尺度</b>。</div>
       </div>
       <div class="story-item cold">
         <div class="when">2026 年 7 月 30 日 · 反讽</div>
         <h4>卖出次日，市场反弹</h4>
-        <p>卖出仓位次日美股 AI 板块大幅反弹。<b>他的长期方向判断没错，但他已不再持有</b>。最终成果被 Citadel 接手。「他没有突然改变对 AI 的判断，只是他的账户已经没有资格继续等待。」</p>
+        <p>卖出仓位次日美股 AI 板块大幅反弹。<b>他的长期方向判断没错，但他已不再持有</b>。最终成果被 Citadel 接手。「他没有突然改变对 AI 的判断，只是他的账户已经没有资格继续等待。」</p><div class="story-quote">「他没有突然改变对 AI 的判断，<b>只是他的账户已经没有资格继续等待</b>。」</div>
       </div>
       <div class="story-item good">
         <div class="when">2026 年 8 月 · 更深的讽刺</div>
         <h4>爆仓之后，硅谷抢着追加投资</h4>
-        <p>margin call 后他致信投资者认错、清除全部杠杆，称这是「代价高昂但无价的教训」。反常识的是：<b>爆仓后短短几天，大批硅谷投资者主动联系要求追加投资</b>，基金反而「暂不接受新资金」。红杉合伙人 Pat Grady 公开说「他将长期是硅谷的重要人物」，Elad Gil 宣布首次申请入资，Redpoint 的 Logan Bartlett 点破：「他被揍了一拳，反而激起大家的团结。」与此同时，Barclays 曾以「单一行业敞口过集中」拒做 prime broker。<b>真正的风险阀门不在 LP 手里，在几家 prime broker 的风控台上</b>。</p>
+        <p>margin call 后他致信投资者认错、清除全部杠杆，称这是「代价高昂但无价的教训」。反常识的是：<b>爆仓后短短几天，大批硅谷投资者主动联系要求追加投资</b>，基金反而「暂不接受新资金」。红杉合伙人 Pat Grady 公开说「他将长期是硅谷的重要人物」，Elad Gil 宣布首次申请入资，Redpoint 的 Logan Bartlett 点破：「他被揍了一拳，反而激起大家的团结。」与此同时，Barclays 曾以「单一行业敞口过集中」拒做 prime broker。<b>真正的风险阀门不在 LP 手里，在几家 prime broker 的风控台上</b>。</p><div class="story-quote">爆仓不是终点：<b>硅谷的失败定价，把伤疤变成了勋章</b>。</div>
       </div>
     </div>
   </div>
@@ -907,6 +934,12 @@ td:first-child {
   <div class="container">
     <div class="section-title"><span class="num">05</span>底层机制 · 硅谷 vs 华尔街</div>
     <p class="section-lead">Aschenbrenner 的爆仓不是孤立事件，它暴露了硅谷与华尔街两套资本逻辑的碰撞。表面是文化，底层是四个变量：<b style="color:var(--spark)">时间尺度、资本结构、失败定价、信息类型</b>。文化只是这四个变量的涌现产物。</p>
+    <div class="var-grid">
+      <div class="var-chip"><div class="vi">⏳</div><div class="vt">时间尺度</div><div class="vs">7-10 年 vs 按日盯市</div></div>
+      <div class="var-chip"><div class="vi">🏗️</div><div class="vt">资本结构</div><div class="vs">call option vs put option</div></div>
+      <div class="var-chip"><div class="vi">💀</div><div class="vt">失败定价</div><div class="vs">伤疤是勋章 vs 案底</div></div>
+      <div class="var-chip"><div class="vi">📡</div><div class="vt">信息类型</div><div class="vs">判断人 vs 测量仓位</div></div>
+    </div>
 
     <div class="collision">
       <h3><span class="cnum">变量 1</span>时间尺度 · 买期权 vs 做市</h3>
