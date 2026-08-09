@@ -152,12 +152,11 @@ body {
 }
 
 .players {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
   margin-top: 8px;
 }
-@media (max-width: 900px) { .players { grid-template-columns: 1fr; } }
 .player {
   background: var(--card);
   border: 1px solid var(--border);
@@ -165,19 +164,33 @@ body {
   overflow: hidden;
   transition: transform .25s ease, box-shadow .25s ease;
   position: relative;
+  display: grid;
+  grid-template-columns: 300px 1fr;
 }
-.player:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,.4); }
+.player:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,.4); }
 .player-top { height: 4px; }
 .player-karp .player-top { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
 .player-dean .player-top { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
 .player-aschen .player-top { background: linear-gradient(90deg, #ef4444, #f87171); }
+/* 左侧色条：卡片身份的垂直线索 */
+.player::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  z-index: 3;
+}
+.player-karp::before { background: linear-gradient(180deg, #f59e0b, #fbbf24); }
+.player-dean::before { background: linear-gradient(180deg, #3b82f6, #60a5fa); }
+.player-aschen::before { background: linear-gradient(180deg, #ef4444, #f87171); }
 .player-photo-wrap {
   position: relative;
-  aspect-ratio: 3 / 2;
   overflow: hidden;
   background: var(--card2);
 }
 .player-photo-wrap img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -206,13 +219,13 @@ body {
 .player-karp .player-photo-tag { background: var(--karp-dim); color: var(--karp); border: 1px solid rgba(245,158,11,.4); }
 .player-dean .player-photo-tag { background: var(--dean-dim); color: #60a5fa; border: 1px solid rgba(59,130,246,.4); }
 .player-aschen .player-photo-tag { background: var(--aschen-dim); color: var(--bad); border: 1px solid rgba(239,68,68,.4); }
-.player-body { padding: 20px 20px 24px; }
+.player-body { padding: 22px 26px; display: flex; flex-direction: column; justify-content: center; }
 .player-name {
   font-size: 22px;
   font-weight: 800;
   margin-bottom: 2px;
 }
-.player-role { font-size: 13px; color: var(--text2); margin-bottom: 16px; }
+.player-role { font-size: 13px; color: var(--text2); margin-bottom: 12px; }
 .player-layer {
   display: inline-block;
   font-size: 12px;
@@ -224,10 +237,15 @@ body {
 .player-karp .player-layer { background: var(--karp-dim); color: var(--karp); }
 .player-dean .player-layer { background: var(--dean-dim); color: #60a5fa; }
 .player-aschen .player-layer { background: var(--aschen-dim); color: var(--bad); }
-.player-desc { font-size: 14px; color: var(--text2); margin-bottom: 14px; }
-.player-facts { font-size: 13px; color: var(--text3); border-top: 1px solid var(--border); padding-top: 12px; }
+.player-desc { font-size: 14px; color: var(--text2); margin-bottom: 12px; }
+.player-facts { font-size: 13px; color: var(--text3); border-top: 1px solid var(--border); padding-top: 10px; }
 .player-facts div { margin-bottom: 4px; }
 .player-facts b { color: var(--text2); font-weight: 600; }
+@media (max-width: 760px) {
+  .player { grid-template-columns: 1fr; }
+  .player-photo-wrap { aspect-ratio: 16 / 9; position: relative; }
+  .player-photo-wrap img { position: absolute; inset: 0; width: 100%; height: 100%; }
+}
 .ai-note {
   font-size: 11px;
   color: var(--text3);
@@ -675,14 +693,13 @@ td:first-child {
     <p class="section-lead">三个都是「顶尖 AI 精英脱离大机构单干」，但各自的资本结构决定了他们在价值链上占据完全不同的位置。</p>
     <div class="players">
       <div class="player player-karp">
-        <div class="player-top"></div>
         <div class="player-photo-wrap">
           <img src="karp.webp" alt="Alex Karp" loading="lazy">
+          <span class="player-photo-tag">应用层 · 下游</span>
         </div>
         <div class="player-body">
           <div class="player-name">Alex Karp</div>
-          <div class="player-role">Palantir CEO · 应用层</div>
-          <div class="player-layer">下游 · 企业软件现金流</div>
+          <div class="player-role">Palantir CEO · 企业软件现金流</div>
           <p class="player-desc">「买 Token 创造不了价值。」AI 价值链的现金流端：把模型装进高风险企业场景，靠信任和现场交付收钱。</p>
           <div class="player-facts">
             <div><b>变现：</b>软件现金流</div>
@@ -692,14 +709,13 @@ td:first-child {
         </div>
       </div>
       <div class="player player-dean">
-        <div class="player-top"></div>
         <div class="player-photo-wrap">
           <img src="dean.webp" alt="Jeff Dean" loading="lazy">
+          <span class="player-photo-tag">研究层 · 上游</span>
         </div>
         <div class="player-body">
           <div class="player-name">Jeff Dean</div>
-          <div class="player-role">Discovery Loop 创始人 · 研究层</div>
-          <div class="player-layer">上游 · 自动化科研循环</div>
+          <div class="player-role">Discovery Loop 创始人 · 自动化科研</div>
           <p class="player-desc">Google 27 年老将离开大厂，用 AI 自动化「假设→实验→评估→迭代」的科学循环。Alphabet 第一年算力全包。</p>
           <div class="player-facts">
             <div><b>变现：</b>十年尺度耐心资本</div>
@@ -709,14 +725,13 @@ td:first-child {
         </div>
       </div>
       <div class="player player-aschen">
-        <div class="player-top"></div>
         <div class="player-photo-wrap">
           <img src="aschen.webp" alt="Leopold Aschenbrenner" loading="lazy">
+          <span class="player-photo-tag">金融层 · 定价</span>
         </div>
         <div class="player-body">
           <div class="player-name">Leopold Aschenbrenner</div>
-          <div class="player-role">Situational Awareness 基金 · 金融层</div>
-          <div class="player-layer">定价层 · 信仰资本 + 杠杆</div>
+          <div class="player-role">Situational Awareness 基金 · 信仰资本 + 杠杆</div>
           <p class="player-desc">前 OpenAI 研究员，一篇 165 页宣言募到百亿资金，四倍杠杆重仓 AI 基建。方向看对，被杠杆反噬。</p>
           <div class="player-facts">
             <div><b>变现：</b>信仰溢价 + 杠杆放大</div>
@@ -824,8 +839,8 @@ td:first-child {
 
     <div class="collision">
       <h3><span class="cnum">对撞 4</span>递归自我改进：三人的终极分歧</h3>
-      <div class="claim claim-dean"><span class="who">Jeff Dean 的暗线</span><p>「用 AI 造更强的 AI」。Discovery Loop 的真正杀手锏，Alphabet 供血的真正原因。</p></div>
       <div class="claim claim-karp"><span class="who">Karp 的立场</span><p>软件三层论里「PhD 团队 + LLM 壁垒最低」，明确认为研究层不是价值核心。</p></div>
+      <div class="claim claim-dean"><span class="who">Jeff Dean 的暗线</span><p>「用 AI 造更强的 AI」。Discovery Loop 的真正杀手锏，Alphabet 供血的真正原因。</p></div>
       <div class="claim claim-aschen"><span class="who">Aschenbrenner 的赌注</span><p>基金重仓的正是「递归自我改进会加速」，SA 论文的核心论点。</p></div>
       <div class="collision-conclusion">
         <div class="tag">对撞结论</div>
