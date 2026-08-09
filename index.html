@@ -343,6 +343,25 @@ td:first-child {
 .collision-conclusion b { color: var(--spark); }
 
 /* ===== KEY FINDING ===== */
+/* 最大发现：全页灵魂，视觉重音 */
+.finding-section {
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(34,211,238,.07), transparent 70%),
+              radial-gradient(ellipse 60% 50% at 80% 100%, rgba(245,158,11,.05), transparent 70%);
+  border-top: 1px solid rgba(34,211,238,.15);
+  border-bottom: 1px solid rgba(34,211,238,.15);
+}
+.finding-section .finding {
+  background: linear-gradient(135deg, rgba(34,211,238,.1), rgba(245,158,11,.07));
+  border: 1px solid rgba(34,211,238,.35);
+  box-shadow: 0 0 60px rgba(34,211,238,.08), inset 0 0 40px rgba(34,211,238,.04);
+}
+.finding-section .section-title { justify-content: center; }
+.finding-section .section-lead { margin-left: auto; margin-right: auto; text-align: center; }
+
+/* 爆仓故事：叙事高潮背景带 */
+#aschen { background: linear-gradient(180deg, transparent, rgba(239,68,68,.04), transparent); }
+#aschen .section-title .num { color: var(--bad); border-color: var(--bad); }
+
 .finding {
   background: linear-gradient(135deg, rgba(34,211,238,.08), rgba(245,158,11,.06));
   border: 1px solid rgba(34,211,238,.3);
@@ -665,9 +684,9 @@ td:first-child {
     <div class="nav-links">
       <a href="#players">三切片</a>
       <a href="#collisions">对撞点</a>
-      <a href="#finding">最大发现</a>
       <a href="#aschen">爆仓故事</a>
       <a href="#svws">硅谷vs华尔街</a>
+      <a href="#finding">最大发现</a>
       <a href="#conclusion">投资判断</a>
     </div>
   </div>
@@ -862,34 +881,6 @@ td:first-child {
   </div>
 </section>
 
-<!-- ============ KEY FINDING ============ -->
-<section class="section" id="finding">
-  <div class="container">
-    <div class="section-title"><span class="num">07</span>对撞最大发现</div>
-    <div class="finding fade-in">
-      <div class="kicker">⚡ 对撞最大发现</div>
-      <h2>AI 时代赚钱的人都有 <span class="loop">循环</span><br>只有 <span class="direction">方向</span> 的人需要杠杆<br>而杠杆会击穿信仰</h2>
-      <div class="loop-cards">
-        <div class="loop-card">
-          <div class="lname k">🟠 Karp · 应用循环</div>
-          <p>模型 → 企业场景 → 现金流，循环自洽。</p>
-          <div class="cycle"><b>最稳</b>：现金流自洽，不依赖单一金主</div>
-        </div>
-        <div class="loop-card">
-          <div class="lname d">🔵 Jeff Dean · 科研循环</div>
-          <p>假设 → 实验 → 评估 → 迭代，循环靠外部供血。</p>
-          <div class="cycle"><b>看金主耐心</b>：Alphabet 随时可撤</div>
-        </div>
-        <div class="loop-card none">
-          <div class="lname a">🔴 Aschenbrenner · 无循环</div>
-          <p>只有方向判断，不参与任何循环，靠杠杆弥补。</p>
-          <div class="cycle"><b>杠杆赌注</b>：margin call 不由信仰转移</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ============ ASCHENBRENNER STORY ============ -->
 <section class="section" id="aschen">
   <div class="container">
@@ -1003,10 +994,38 @@ td:first-child {
   </div>
 </section>
 
+<!-- ============ KEY FINDING ============ -->
+<section class="section finding-section" id="finding">
+  <div class="container">
+    <div class="section-title"><span class="num">06</span>对撞最大发现</div>
+    <div class="finding fade-in">
+      <div class="kicker">⚡ 对撞最大发现</div>
+      <h2>AI 时代赚钱的人都有 <span class="loop">循环</span><br>只有 <span class="direction">方向</span> 的人需要杠杆<br>而杠杆会击穿信仰</h2>
+      <div class="loop-cards">
+        <div class="loop-card">
+          <div class="lname k">🟠 Karp · 应用循环</div>
+          <p>模型 → 企业场景 → 现金流，循环自洽。</p>
+          <div class="cycle"><b>最稳</b>：现金流自洽，不依赖单一金主</div>
+        </div>
+        <div class="loop-card">
+          <div class="lname d">🔵 Jeff Dean · 科研循环</div>
+          <p>假设 → 实验 → 评估 → 迭代，循环靠外部供血。</p>
+          <div class="cycle"><b>看金主耐心</b>：Alphabet 随时可撤</div>
+        </div>
+        <div class="loop-card none">
+          <div class="lname a">🔴 Aschenbrenner · 无循环</div>
+          <p>只有方向判断，不参与任何循环，靠杠杆弥补。</p>
+          <div class="cycle"><b>杠杆赌注</b>：margin call 不由信仰转移</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ COUNTER ARG ============ -->
 <section class="section">
   <div class="container">
-    <div class="section-title"><span class="num">06</span>反方自检 · 攻击 vs 回应</div>
+    <div class="section-title"><span class="num">07</span>反方自检 · 攻击 vs 回应</div>
     <div class="counter fade-in">
       <div class="counter-side counter-attack">
         <span class="side-tag">🔴 最强攻击</span>
