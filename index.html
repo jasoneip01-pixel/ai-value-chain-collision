@@ -39,7 +39,6 @@ body {
 }
 .container { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
 
-/* ===== HERO ===== */
 .hero {
   min-height: 92vh;
   display: flex;
@@ -135,7 +134,6 @@ body {
 }
 @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
 
-/* ===== SECTION ===== */
 .section { padding: 64px 0; position: relative; }
 .section-title {
   font-size: clamp(22px, 4vw, 32px);
@@ -161,7 +159,6 @@ body {
   max-width: 760px;
 }
 
-/* ===== PLAYER CARDS ===== */
 .players {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -246,7 +243,6 @@ body {
   font-style: italic;
 }
 
-/* ===== TABLE ===== */
 .table-wrap {
   overflow-x: auto;
   border-radius: var(--radius);
@@ -281,7 +277,6 @@ td:first-child {
 .cell-dean { color: #60a5fa; }
 .cell-aschen { color: var(--bad); }
 
-/* ===== COLLISION CARDS ===== */
 .collision {
   background: var(--card);
   border: 1px solid var(--border);
@@ -342,7 +337,6 @@ td:first-child {
 .collision-conclusion p { font-size: 15px; color: var(--text); }
 .collision-conclusion b { color: var(--spark); }
 
-/* ===== KEY FINDING ===== */
 /* 最大发现：全页灵魂，视觉重音 */
 .finding-section {
   background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(34,211,238,.07), transparent 70%),
@@ -424,7 +418,6 @@ td:first-child {
 .loop-card .cycle b { color: var(--good); }
 .loop-card.none { opacity: .75; border-style: dashed; }
 
-/* ===== ASCHEN STORY ===== */
 .story-timeline { margin-top: 8px; position: relative; padding-left: 28px; }
 .story-timeline::before {
   content: '';
@@ -471,7 +464,6 @@ td:first-child {
 .story-note a { color: var(--spark); text-decoration: none; }
 .story-note a:hover { text-decoration: underline; }
 
-/* ===== COUNTER ARG ===== */
 .counter {
   background: var(--card);
   border: 1px solid var(--border);
@@ -526,7 +518,6 @@ td:first-child {
 }
 @media (max-width: 760px) { .counter-vs { display: none; } }
 
-/* ===== CONCLUSION ===== */
 .conclusion {
   background: linear-gradient(160deg, var(--card2), var(--bg2));
   border: 1px solid var(--border);
@@ -565,7 +556,6 @@ td:first-child {
 .invest-card.rank3 .rank { color: var(--bad); }
 .invest-card p b { color: var(--text); }
 
-/* ===== FOOTER ===== */
 .footer {
   padding: 48px 0 60px;
   text-align: center;
@@ -576,11 +566,9 @@ td:first-child {
 }
 .footer .sig { margin-top: 8px; color: var(--text2); }
 
-/* ===== ANIMATIONS ===== */
 .fade-in { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-/* ===== NAV ===== */
 .nav {
   position: sticky;
   top: 0;
@@ -642,7 +630,6 @@ td:first-child {
   .nav-links a { padding: 5px 10px; font-size: 12.5px; }
 }
 
-/* back to top */
 .back-top {
   position: fixed;
   bottom: 28px; right: 28px;
@@ -663,7 +650,6 @@ td:first-child {
 .back-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
 .back-top:hover { background: rgba(34,211,238,.15); }
 
-/* progress bar */
 .progress {
   position: fixed;
   top: 0; left: 0;
@@ -691,8 +677,6 @@ td:first-child {
     </div>
   </div>
 </nav>
-
-<!-- ============ HERO ============ -->
 <header class="hero">
   <div class="hero-kicker">COLLISION ANALYSIS · 2026-08</div>
   <h1>三案例对撞</h1>
@@ -709,8 +693,6 @@ td:first-child {
   </div>
   <div class="scroll-hint">▼ 向下滚动 · 完整对撞链</div>
 </header>
-
-<!-- ============ PLAYERS ============ -->
 <section class="section" id="players">
   <div class="container">
     <div class="section-title"><span class="num">01</span>三个玩家 · AI 价值链的三个切片</div>
@@ -770,8 +752,6 @@ td:first-child {
     </div>
   </div>
 </section>
-
-<!-- ============ POSITION TABLE ============ -->
 <section class="section">
   <div class="container">
     <div class="section-title"><span class="num">02</span>定位对比 · 三种资本结构</div>
@@ -828,8 +808,6 @@ td:first-child {
     </div>
   </div>
 </section>
-
-<!-- ============ COLLISIONS ============ -->
 <section class="section" id="collisions">
   <div class="container">
     <div class="section-title"><span class="num">03</span>四个对撞点</div>
@@ -880,8 +858,6 @@ td:first-child {
     </div>
   </div>
 </section>
-
-<!-- ============ ASCHENBRENNER STORY ============ -->
 <section class="section" id="aschen">
   <div class="container">
     <div class="section-title"><span class="num">04</span>Aschenbrenner 案例 · 从先知到爆仓</div>
@@ -939,7 +915,6 @@ td:first-child {
   </div>
 </section>
 
-<!-- ============ SV vs WS ============ -->
 <section class="section" id="svws">
   <div class="container">
     <div class="section-title"><span class="num">05</span>底层机制 · 硅谷 vs 华尔街</div>
@@ -993,8 +968,6 @@ td:first-child {
     </div>
   </div>
 </section>
-
-<!-- ============ KEY FINDING ============ -->
 <section class="section finding-section" id="finding">
   <div class="container">
     <div class="section-title"><span class="num">06</span>对撞最大发现</div>
@@ -1021,8 +994,6 @@ td:first-child {
     </div>
   </div>
 </section>
-
-<!-- ============ COUNTER ARG ============ -->
 <section class="section">
   <div class="container">
     <div class="section-title"><span class="num">07</span>反方自检 · 攻击 vs 回应</div>
@@ -1040,8 +1011,6 @@ td:first-child {
     </div>
   </div>
 </section>
-
-<!-- ============ CONCLUSION ============ -->
 <section class="section" id="conclusion">
   <div class="container">
     <div class="section-title"><span class="num">08</span>投资判断</div>
