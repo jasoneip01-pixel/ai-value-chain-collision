@@ -88,20 +88,44 @@ body {
   margin-top: 20px;
   max-width: 640px;
 }
-.hero-tags {
-  margin-top: 32px;
+.hero-photos {
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  gap: 16px;
   justify-content: center;
+  margin-top: 40px;
+  flex-wrap: wrap;
 }
-.hero-tags span {
-  padding: 6px 16px;
-  border-radius: 100px;
-  font-size: 13px;
-  border: 1px solid var(--border);
-  color: var(--text2);
-  background: rgba(19,26,43,.6);
+.hero-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--border);
+  position: relative;
+  box-shadow: 0 8px 24px rgba(0,0,0,.4);
+  transition: transform .3s ease, border-color .3s ease;
+}
+.hero-photo:hover { transform: translateY(-4px); }
+.hero-photo.karp { border-color: rgba(245,158,11,.6); }
+.hero-photo.dean { border-color: rgba(59,130,246,.6); }
+.hero-photo.aschen { border-color: rgba(239,68,68,.6); }
+.hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+.hero-photo.karp img { object-position: 50% 18%; }
+.hero-photo.dean img { object-position: 50% 15%; }
+.hero-photo.aschen img { object-position: 50% 0%; }
+.hero-photo .hp-name {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 14px 0 6px;
+  text-align: center;
+  background: linear-gradient(180deg, transparent, rgba(10,14,23,.85));
+  color: var(--text);
+}
+@media (max-width: 560px) {
+  .hero-photo { width: 96px; height: 96px; }
+  .hero-photo .hp-name { font-size: 10px; }
 }
 .scroll-hint {
   margin-top: 60px;
@@ -160,16 +184,19 @@ body {
 .player-aschen .player-top { background: linear-gradient(90deg, #ef4444, #f87171); }
 .player-photo-wrap {
   position: relative;
-  height: 230px;
+  aspect-ratio: 3 / 2;
   overflow: hidden;
+  background: var(--card2);
 }
 .player-photo-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 20%;
   transition: transform .4s ease;
 }
+.player-karp .player-photo-wrap img { object-position: 50% 18%; }
+.player-dean .player-photo-wrap img { object-position: 50% 15%; }
+.player-aschen .player-photo-wrap img { object-position: 50% 0%; }
 .player:hover .player-photo-wrap img { transform: scale(1.04); }
 .player-photo-wrap::after {
   content: '';
@@ -337,7 +364,24 @@ td:first-child {
   margin-bottom: 24px;
 }
 .finding h2 .loop { color: var(--good); }
-.finding h2 .direction { color: var(--bad); text-decoration: line-through; text-decoration-color: rgba(248,113,113,.5); }
+.finding h2 .direction {
+  color: var(--bad);
+  text-decoration: line-through;
+  text-decoration-color: rgba(248,113,113,.6);
+  text-decoration-thickness: 4px;
+  position: relative;
+}
+.finding h2 .direction::after {
+  content: '✕';
+  position: absolute;
+  right: -34px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--bad);
+  -webkit-text-fill-color: var(--bad);
+  font-size: .7em;
+  opacity: .9;
+}
 .loop-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -414,17 +458,54 @@ td:first-child {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 28px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 16px;
+  align-items: center;
 }
-.counter blockquote {
-  border-left: 4px solid var(--bad);
-  padding: 8px 0 8px 20px;
+@media (max-width: 760px) { .counter { grid-template-columns: 1fr; } }
+@media (max-width: 760px) { .counter { grid-template-columns: 1fr; } }
+.counter-side {
+  border-radius: 12px;
+  padding: 20px;
+}
+.counter-side .side-tag {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  display: block;
+}
+.counter-attack {
+  background: rgba(248,113,113,.06);
+  border: 1px solid rgba(248,113,113,.25);
+}
+.counter-attack .side-tag { color: var(--bad); }
+.counter-attack blockquote {
+  border: none;
+  padding: 0;
   font-size: 15px;
   color: var(--text2);
   font-style: italic;
-  margin-bottom: 24px;
+  margin: 0;
 }
-.counter h4 { font-size: 15px; font-weight: 700; margin-bottom: 12px; color: var(--good); }
-.counter p { font-size: 14.5px; color: var(--text2); }
+.counter-defense {
+  background: rgba(52,211,153,.06);
+  border: 1px solid rgba(52,211,153,.25);
+}
+.counter-defense .side-tag { color: var(--good); }
+.counter-defense h4 { font-size: 15px; font-weight: 700; margin-bottom: 12px; color: var(--good); }
+.counter-defense p { font-size: 14.5px; color: var(--text2); }
+.counter-vs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--spark);
+  text-shadow: 0 0 16px rgba(34,211,238,.4);
+}
+@media (max-width: 760px) { .counter-vs { display: none; } }
 
 /* ===== CONCLUSION ===== */
 .conclusion {
@@ -568,6 +649,11 @@ td:first-child {
     <span>🟠 Alex Karp · Palantir</span>
     <span>🔵 Jeff Dean · Discovery Loop</span>
     <span>🔴 Aschenbrenner · SA Fund</span>
+  </div>
+  <div class="hero-photos">
+    <div class="hero-photo karp"><img src="karp.webp" alt="Alex Karp" loading="eager"><span class="hp-name">Karp</span></div>
+    <div class="hero-photo dean"><img src="dean.webp" alt="Jeff Dean" loading="eager"><span class="hp-name">Jeff Dean</span></div>
+    <div class="hero-photo aschen"><img src="aschen.webp" alt="Leopold Aschenbrenner" loading="eager"><span class="hp-name">Aschenbrenner</span></div>
   </div>
   <div class="scroll-hint">▼ 向下滚动 · 完整对撞链</div>
 </header>
@@ -746,6 +832,7 @@ td:first-child {
 <!-- ============ KEY FINDING ============ -->
 <section class="section" id="finding">
   <div class="container">
+    <div class="section-title"><span class="num">07</span>对撞最大发现</div>
     <div class="finding fade-in">
       <div class="kicker">⚡ 对撞最大发现</div>
       <h2>AI 时代赚钱的人都有 <span class="loop">循环</span><br>只有 <span class="direction">方向</span> 的人需要杠杆<br>而杠杆会击穿信仰</h2>
@@ -886,11 +973,18 @@ td:first-child {
 <!-- ============ COUNTER ARG ============ -->
 <section class="section">
   <div class="container">
-    <div class="section-title"><span class="num">06</span>反方自检</div>
+    <div class="section-title"><span class="num">06</span>反方自检 · 攻击 vs 回应</div>
     <div class="counter fade-in">
-      <blockquote>「你把三个案例凑成『价值链三层』，但 Karp 是上市公司 CEO（有估值动机）、Jeff Dean 是刚创业（有融资动机）、Aschenbrenner 是爆仓者（有自保动机）——三个都是利益绑定叙事，凑在一起是对号入座，不是发现。」</blockquote>
-      <h4>回应 · 行动证据比言论可靠</h4>
-      <p>这是真实风险，但三个案例的<b>行动证据</b>比言论可靠——Jeff Dean 离开 27 年大厂是行动、Alphabet 供血是行动、Aschenbrenner 加杠杆是行动、爆仓是行动。言论会撒谎，行动不会。<b>对撞的价值不在三人的「说法」一致，在三个行动的资本结构差异</b>（现金流 vs 耐心资本 vs 杠杆）恰好覆盖了 AI 价值链的完整光谱。修正：把三人当「AI 时代的三种资本结构样本」，而不是「三个观点」。</p>
+      <div class="counter-side counter-attack">
+        <span class="side-tag">🔴 最强攻击</span>
+        <blockquote>「你把三个案例凑成『价值链三层』，但 Karp 是上市公司 CEO（有估值动机）、Jeff Dean 是刚创业（有融资动机）、Aschenbrenner 是爆仓者（有自保动机）——三个都是利益绑定叙事，凑在一起是对号入座，不是发现。」</blockquote>
+      </div>
+      <div class="counter-vs">VS</div>
+      <div class="counter-side counter-defense">
+        <span class="side-tag">🟢 回应 · 行动证据比言论可靠</span>
+        <h4>言论会撒谎，行动不会</h4>
+        <p>这是真实风险，但三个案例的<b>行动证据</b>比言论可靠——Jeff Dean 离开 27 年大厂是行动、Alphabet 供血是行动、Aschenbrenner 加杠杆是行动、爆仓是行动。<b>对撞的价值不在三人的「说法」一致，在三个行动的资本结构差异</b>（现金流 vs 耐心资本 vs 杠杆）恰好覆盖了 AI 价值链的完整光谱。修正：把三人当「AI 时代的三种资本结构样本」，而不是「三个观点」。</p>
+      </div>
     </div>
   </div>
 </section>
@@ -898,6 +992,7 @@ td:first-child {
 <!-- ============ CONCLUSION ============ -->
 <section class="section" id="conclusion">
   <div class="container">
+    <div class="section-title"><span class="num">08</span>投资判断</div>
     <div class="conclusion fade-in">
       <h3>一句话总结</h3>
       <div class="big">Karp、Jeff Dean、Aschenbrenner 是 AI 价值链的三个切片——<b>应用层现金流、研究层耐心资本、金融层信仰杠杆</b>。<br>对撞的最大发现：<b>AI 时代真正赚钱的人都有「循环」</b>（应用循环/科研循环/训练循环），只有方向没有循环的人需要用杠杆弥补，而杠杆会击穿信仰。<br>三人的共同命门是同一个不可控变量：<b>递归自我改进是否成立</b>。</div>
