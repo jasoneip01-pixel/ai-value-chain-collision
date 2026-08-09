@@ -571,8 +571,31 @@ td:first-child {
   border-bottom: 1px solid rgba(36,48,73,.6);
   padding: 10px 0;
 }
-.nav-inner { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-.nav-links { display: flex; gap: 6px; font-size: 13px; flex-wrap: wrap; }
+.nav-inner { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.nav-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .3px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+.nav-title .logo {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--karp), var(--spark), var(--aschen));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #0a0e17;
+  font-weight: 900;
+}
+.nav-title .logo svg { width: 13px; height: 13px; }
+.nav-links { display: flex; gap: 6px; font-size: 13px; }
 .nav-links a {
   color: var(--text2);
   text-decoration: none;
@@ -583,11 +606,21 @@ td:first-child {
 }
 .nav-links a:hover { color: var(--spark); background: rgba(34,211,238,.08); }
 .nav-links a.active { color: var(--spark); background: rgba(34,211,238,.12); font-weight: 700; }
-.nav-title { font-size: 14px; font-weight: 700; white-space: nowrap; }
+/* 移动端：单行横滑，永不换行 */
 @media (max-width: 860px) {
-  .nav-inner { flex-direction: column; align-items: flex-start; gap: 8px; }
-  .nav-links { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .nav-inner { gap: 10px; }
+  .nav-links {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
   .nav-links::-webkit-scrollbar { display: none; }
+  .nav-title { font-size: 12.5px; }
+  .nav-title .nav-title-text { display: none; }
+  .nav-title .logo { width: 20px; height: 20px; }
+  .nav-links a { padding: 5px 10px; font-size: 12.5px; }
 }
 
 /* back to top */
@@ -628,7 +661,7 @@ td:first-child {
 <div class="progress" id="progress"></div>
 <nav class="nav" id="nav">
   <div class="container nav-inner">
-    <div class="nav-title">三案例对撞 · AI 价值链</div>
+    <div class="nav-title"><span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4 L3 12 L7 20"/><path d="M17 4 L21 12 L17 20"/></svg></span><span class="nav-title-text">三案例对撞 · AI 价值链</span></div>
     <div class="nav-links">
       <a href="#players">三切片</a>
       <a href="#collisions">对撞点</a>
